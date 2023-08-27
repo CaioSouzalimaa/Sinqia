@@ -14,7 +14,7 @@ export const AddTouristSpot = () => {
 const _AddTouristSpot = () => {
   return (
     <>
-      <h1>Adicionar Ponto turistico</h1>
+      <h1>Adicionando/Editando Ponto turistico</h1>
     </>
   )
 }

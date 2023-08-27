@@ -11,7 +11,22 @@ export const TouristSpots = () => {
   const _TouristSpots = () => {
   return (
     <>
-      <h1>Pontos turisticos</h1>
+      <div>
+        <button>Adicionar Ponto Turistico</button>
+      </div>
+
+      <div>
+        <input type="text" placeholder="Nome do ponto turistico"/>
+        <button>Buscar</button>
+      </div>
+
+      <div>
+        <div>
+          nome
+          descrição
+          localização
+        </div>
+      </div>
     </>
   )
 }
