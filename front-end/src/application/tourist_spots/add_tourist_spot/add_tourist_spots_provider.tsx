@@ -37,7 +37,7 @@ export const AddTouristSpotsProvider = ({children, id} : {children: ReactNode, i
   }
 
   const onSave = async () => {
-    console.log('onSave');
+    console.log(state);
   }
   const clearError = () => {
     setState(state => ({...state, error: undefined}));
