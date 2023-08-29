@@ -11,7 +11,7 @@ import {
 export const AddTouristSpot = () => {
   const {id} = useParams();
   return (
-    <AddTouristSpotsProvider id={id}>
+    <AddTouristSpotsProvider id={Number(id)}>
       <_AddTouristSpot/>
     </AddTouristSpotsProvider>
   );

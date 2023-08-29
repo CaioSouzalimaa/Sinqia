@@ -12,7 +12,7 @@ export const TouristSpotsProvider = ({children}: { children: ReactNode }) => {
     const touristSpots = await touristSpotsService.getTouristSpots();
     setState(state => ({...state, touristSpots, loading: false}));
   }
-  const deleteTouristSpot = async (id: string) => {
+  const deleteTouristSpot = async (id: number) => {
     setState(state => ({...state, loading: true}));
     await touristSpotsService.deleteTouristSpot(id);
     setState(state => ({...state, loading: false, success: 'Tourist Spot deleted!'}));

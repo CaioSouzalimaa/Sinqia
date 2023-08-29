@@ -23,7 +23,7 @@ interface AddTouristSpotsState {
 
 export const initialState: AddTouristSpotsState = {
   touristSpot: {
-    id: '',
+    id: 0,
     name: '',
     description: '',
     location: '',

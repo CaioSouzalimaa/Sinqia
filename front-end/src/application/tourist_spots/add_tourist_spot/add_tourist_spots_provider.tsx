@@ -3,7 +3,7 @@ import {getIt} from "../../../injection.ts";
 import {AddTouristSpotsContext, initialState} from "./add_tourist_spots_context.ts";
 import {TouristSpotsService} from "../../../domain/tourist_spots/tourist_spots_service.ts";
 
-export const AddTouristSpotsProvider = ({children, id} : {children: ReactNode, id?: string}) => {
+export const AddTouristSpotsProvider = ({children, id} : {children: ReactNode, id?: number}) => {
   const [state, setState] = useState({...initialState, isEditMode: !!id});
   const touristSpotsService = getIt.get<TouristSpotsService>(TouristSpotsService);
   const isEditMode = !!id;
@@ -16,7 +16,7 @@ export const AddTouristSpotsProvider = ({children, id} : {children: ReactNode, i
 
   const getTouristSpot = async () => {
     setState(state => ({...state, loading: true}));
-    const touristSpot = await touristSpotsService.getTouristSpot(id as string);
+    const touristSpot = await touristSpotsService.getTouristSpot(id as number);
     setState(state => ({...state, touristSpot, loading: false}));
   }
 

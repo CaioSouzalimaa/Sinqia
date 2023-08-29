@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {AppRoutes} from "../../app/constants.ts";
 
 interface CardTouristSpotProps {
-  id: string;
+  id: number;
   name: string;
   description: string;
   location: string;
