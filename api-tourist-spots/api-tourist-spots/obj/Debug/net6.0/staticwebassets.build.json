@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "bOvReTtFz6W0iUsYdzUza+3F8KNCJ1oLPxIP6+SBEFI=",
+  "Source": "api-tourist-spots",
+  "BasePath": "_content/api-tourist-spots",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
