@@ -7,7 +7,7 @@ export interface TouristSpotsService {
 
   addTouristSpot(touristSpot: TouristSpotEntity): Promise<void>;
 
-  updateTouristSpot(touristSpot: TouristSpotEntity): Promise<void>;
+  updateTouristSpot(touristSpot: TouristSpotEntity, id: number): Promise<void>;
 
   deleteTouristSpot(id: number): Promise<void>;
 }

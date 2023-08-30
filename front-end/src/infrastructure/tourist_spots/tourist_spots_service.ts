@@ -22,27 +22,41 @@ export class TouristSpotsImpl implements TouristSpotsService {
   }
 
   async getTouristSpot(id: number): Promise<TouristSpotEntity> {
-    console.log('getTouristSpot', id)
-    return {
-      id: id,
-      name: 'name',
-      description: 'description',
-      location: 'location',
-      city: 'city',
-      state: 'state',
-      createdAt: new Date()
-    };
+    const TouristSpots = await api
+      .get(`/TouristSpot/${id}`)
+      .then((response) => {
+        return response.data as TouristSpotEntity;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return TouristSpots as TouristSpotEntity;
   }
 
   async addTouristSpot(touristSpot: TouristSpotEntity): Promise<void> {
-    console.log('addTouristSpot', touristSpot)
+    api
+      .post('/TouristSpot', touristSpot)
+      .then(() => console.log('Tourist Spot successfully added'))
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
-  async updateTouristSpot(touristSpot: TouristSpotEntity): Promise<void> {
-    console.log('updateTouristSpot', touristSpot)
+  async updateTouristSpot(touristSpot: TouristSpotEntity, id: number): Promise<void> {
+    api
+      .put(`/TouristSpot/${id}`, touristSpot)
+      .then(() => console.log('Tourist Spot successfully updated'))
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   async deleteTouristSpot(id: number): Promise<void> {
-    console.log('deleteTouristSpot', id)
+    api
+      .delete(`/TouristSpot/${id}`)
+      .then(() => console.log('Tourist spot successfully deleted'))
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

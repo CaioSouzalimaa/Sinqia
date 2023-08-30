@@ -6,6 +6,7 @@ interface SiteInputProps {
   type: string;
   className?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  defaultValue?: string;
 }
 
 export const SiteInput = (props: SiteInputProps) => {
@@ -15,6 +16,7 @@ export const SiteInput = (props: SiteInputProps) => {
         twMerge("w-full h-11 px-2.5 py-4 rounded border border-line-color text-base font-light",
           props.className)}
       type={props.type}
+      defaultValue={props.defaultValue}
       placeholder={props.placeholder}
       onChange={props.onChange}
     />

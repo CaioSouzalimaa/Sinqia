@@ -6,7 +6,10 @@ import {
   TouristSpotsContext,
   TouristSpotsContextInterface
 } from "../../application/tourist_spots/tourist_spots_context.ts";
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
+import {ModalConfirmDelete} from "./components/modal_confirm_delete.tsx";
+import {SiteButton} from "../shared/components/site_button.tsx";
+import {Snackbar} from "../shared/components/snackbar.tsx";
 
 export const TouristSpots = () => {
   return (
@@ -20,35 +23,82 @@ const _TouristSpots = () => {
   const touristSpotsContext = useContext(TouristSpotsContext) as TouristSpotsContextInterface;
   const state = touristSpotsContext.state;
 
+  const [openModal, setOpenModal] = useState<{ isOpen: boolean, id: number | undefined }>({
+    isOpen: false,
+    id: undefined
+  });
+
+
+  const handleConfirmDelete = () => {
+    const id = openModal.id;
+    setOpenModal({isOpen: false, id: undefined})
+    if (id) {
+      touristSpotsContext.deleteTouristSpot(id);
+    }
+  }
+
+  const handleCancelDelete = () => {
+    setOpenModal({isOpen: false, id: undefined})
+  }
+
   useEffect(() => {
     touristSpotsContext.getTouristSpots();
   }, []);
 
+  useEffect(() => {
+    if (openModal.isOpen) {
+      setTimeout(() => {
+        touristSpotsContext.clearSuccess();
+      }, 3000);
+    }
+  }, [openModal]);
+
   return (
-    <div className={"flex flex-col px-40 py-8 2xl:px-80"}>
-      <div className={"flex w-full gap-6 justify-between"}>
-        <SiteInput placeholder={"Pesquisar..."} type={"text"} onChange={(e) => console.log(e.target.value)}/>
-        <button className={"bg-dark-blue rounded p-2 text-white hover:opacity-80"}>Buscar</button>
-      </div>
+    <div className={"flex flex-col justify-between relative grow px-40 py-8 2xl:px-80"}>
+      <div>
+        <div className={"flex w-full gap-6 justify-between"}>
+          <SiteInput placeholder={"Pesquisar..."} type={"text"} onChange={(e) => console.log(e.target.value)}/>
+          <SiteButton text={"Buscar"} onClick={() => console.log("Buscar")}/>
+        </div>
 
 
-      <div className={"flex flex-col pt-6 gap-10"}>
         {state.loading ?
-          <div>Carregando...</div>
+          <p>Carregando...</p>
           :
-          state.touristSpots.map((touristSpot) => (
-            <CardTouristSpot
-              id={touristSpot.id as number}
-              name={touristSpot.name}
-              description={touristSpot.description}
-              location={touristSpot.location}
-              city={touristSpot.city}
-              state={touristSpot.state}
-            />
-          ))}
+          <div className={"flex flex-col pt-6 gap-10"}>
+          {state.loading ?
+            <div>Carregando...</div>
+            :
+            state.touristSpots.map((touristSpot) => (
+              <CardTouristSpot
+                onDelete={() => setOpenModal({isOpen: true, id: touristSpot.id})}
+                id={touristSpot.id as number}
+                name={touristSpot.name}
+                description={touristSpot.description}
+                location={touristSpot.location}
+                city={touristSpot.city}
+                state={touristSpot.state}
+              />
+            ))}
+        </div>
+        }
       </div>
 
-      <Pagination/>
+      <Pagination arrayLength={state.touristSpots.length} currentPage={1}/>
+
+      {openModal &&
+          <ModalConfirmDelete
+              openModal={openModal.isOpen}
+              onDelete={handleConfirmDelete}
+              onCancel={handleCancelDelete}
+          />
+      }
+
+      <Snackbar
+        type={"success"}
+        message={state.success}
+        open={!!state.success}
+      />
     </div>
   )
 }
