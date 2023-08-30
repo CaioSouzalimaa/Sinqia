@@ -31,26 +31,35 @@ const _AddTouristSpot = () => {
         addTouristSpotContext.clearSuccess();
         navigate("/");
       }, 3000);
+    } else if (state.error) {
+      setTimeout(() => {
+        addTouristSpotContext.clearError();
+      }, 3000);
     }
-  }, [state.success]);
+  }, [state.success, state.error]);
 
   return (
     <div className={"flex flex-col px-40 py-8 2xl:px-80 text-dark-blue gap-4"}>
       <div className={"flex flex-col gap-2"}>
-        <p className={"font-medium"}>Nome</p>
+        <p className={"font-medium"}>Nome *</p>
         <SiteInput placeholder={"Digite um nome"} defaultValue={state.touristSpot.name} type={"text"}
                    onChange={(e) => addTouristSpotContext.onNameChange(e.target.value)}/>
       </div>
       <div>
-        <p className={"font-medium"}>Descrição</p>
-        <SiteInput placeholder={"Digite uma descrição"} defaultValue={state.touristSpot.description} type={"text"}
-                   onChange={(e) => addTouristSpotContext.onDescriptionChange(e.target.value)}/>
+        <p className={"font-medium"}>Descrição *</p>
+        <SiteInput
+          placeholder={"Digite uma descrição"}
+          defaultValue={state.touristSpot.description}
+          type={"text"}
+          maxLength={100}
+          onChange={(e) => addTouristSpotContext.onDescriptionChange(e.target.value)}
+        />
       </div>
       <div className={"flex w-full items-center gap-4"}>
         <SelectState defaultValue={state.touristSpot.state.toUpperCase()}
                      onChange={(e) => addTouristSpotContext.onStateChange(e.target.value)}/>
         <div className={"w-full"}>
-          <p className="font-medium">Cidade</p>
+          <p className="font-medium">Cidade *</p>
           <SiteInput placeholder={"Digite uma cidade"} defaultValue={state.touristSpot.city} type={"text"}
                      onChange={(e) => addTouristSpotContext.onCityChange(e.target.value)}/>
         </div>
@@ -70,6 +79,12 @@ const _AddTouristSpot = () => {
         type={"success"}
         open={!!state.success}
         message={state.success}
+      />
+
+      <Snackbar
+        type={"error"}
+        open={!!state.error}
+        message={state.error}
       />
     </div>
   )

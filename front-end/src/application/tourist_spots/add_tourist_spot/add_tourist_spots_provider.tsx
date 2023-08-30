@@ -39,15 +39,31 @@ export const AddTouristSpotsProvider = ({children, id} : {children: ReactNode, i
 
   // Function to save the tourist spot
   const onSave = async () => {
-    setState(state => ({...state, loading: true}));
-    if (isEditMode) {
-      const createdAt = new Date();
-      setState(state => ({...state, touristSpot: {...state.touristSpot, createdAt}}));
-      await touristSpotsService.updateTouristSpot(state.touristSpot, id as number);
-    } else {
-      await touristSpotsService.addTouristSpot(state.touristSpot);
+    if (!state.touristSpot.name) {
+      setState(state => ({...state, error: 'Insira um nome.'}));
+      return;
     }
-    setState(state => ({...state, loading: false, success: 'Ponto turistico adicionado!'}));
+    if (!state.touristSpot.description) {
+      setState(state => ({...state, error: 'Insira uma descrição.'}));
+      return;
+    }
+    if (!state.touristSpot.city) {
+      setState(state => ({...state, error: 'Insira uma cidade.'}));
+      return;
+    }
+    try{
+      setState(state => ({...state, loading: true}));
+      if (isEditMode) {
+        const createdAt = new Date();
+        setState(state => ({...state, touristSpot: {...state.touristSpot, createdAt}}));
+        await touristSpotsService.updateTouristSpot(state.touristSpot, id as number);
+      } else {
+        await touristSpotsService.addTouristSpot(state.touristSpot);
+      }
+      setState(state => ({...state, loading: false, success: 'Ponto turistico adicionado com sucesso!'}));
+    } catch (e)  {
+      setState(state => ({...state, loading: false, error: "Erro ao adicionar o ponto turístico"}));
+    }
   }
 
   const clearError = () => {

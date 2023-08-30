@@ -7,6 +7,7 @@ interface SiteInputProps {
   className?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   defaultValue?: string;
+  maxLength?: number;
 }
 
 export const SiteInput = (props: SiteInputProps) => {
@@ -19,6 +20,7 @@ export const SiteInput = (props: SiteInputProps) => {
       defaultValue={props.defaultValue}
       placeholder={props.placeholder}
       onChange={props.onChange}
+      maxLength={props.maxLength}
     />
   )
 }

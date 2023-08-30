@@ -28,7 +28,7 @@ export const initialState: AddTouristSpotsState = {
     description: '',
     location: '',
     city: '',
-    state: '',
+    state: 'AC',
     createdAt: new Date(),
   },
   loading: false,
