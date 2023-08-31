@@ -18,11 +18,11 @@ Esta API se comunica com o banco de dados SQL Server, então é necessário ter 
 1. Vá até o arquivo appsettings.json e altere a string de conexão com o banco de dados adicionando sua senha ou crie um usuario SA com a senha teste123. 
 Você pode encontrar este arquivo em:
 ```bash
- /api-tourist-spots/api-tourist-spots/appsettings.json
+ /api-tourist-spots/appsettings.json
 ```
 2. Vá até a pasta do projeto
 ```bash
-cd api-tourist-spots/api-tourist-spots
+cd api-tourist-spots
 ```
 3. Execute o comando para rodar a API em localhost:7270
 ```bash
@@ -36,7 +36,7 @@ dotnet run
 cd front-end
 ```
 
-3. Instale as dependencias
+2. Instale as dependencias
 ```bash
 yarn
 ```
