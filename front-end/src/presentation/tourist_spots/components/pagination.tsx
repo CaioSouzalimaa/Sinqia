@@ -1,14 +1,16 @@
 interface PaginationProps {
   arrayLength: number;
   currentPage: number;
+  itemsPerPage: number;
 }
 
 export const Pagination = (props: PaginationProps) => {
+  const maxPages = props.arrayLength / props.itemsPerPage;
   return (
     <div className="flex flex-col items-center">
       <span className="text-sm text-gray-700 dark:text-gray-400">
       Página <span className="font-semibold text-gray-900 dark:text-white">{props.currentPage}</span> de <span
-        className="font-semibold text-gray-900 dark:text-white">{props.arrayLength}</span>
+        className="font-semibold text-gray-900 dark:text-white">{Math.ceil(maxPages)}</span>
       </span>
       <div className="inline-flex mt-2 xs:mt-0">
         <button

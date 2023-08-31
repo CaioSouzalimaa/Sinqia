@@ -84,7 +84,7 @@ const _TouristSpots = () => {
         }
       </div>
 
-      <Pagination arrayLength={state.touristSpots.length} currentPage={1}/>
+      <Pagination arrayLength={state.touristSpots.length} currentPage={1} itemsPerPage={5}/>
 
       {openModal &&
           <ModalConfirmDelete
