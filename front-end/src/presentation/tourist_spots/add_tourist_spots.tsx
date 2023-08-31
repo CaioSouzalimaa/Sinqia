@@ -42,7 +42,7 @@ const _AddTouristSpot = () => {
 
   return (
     <>
-      <div className={"flex flex-col px-40 py-8 2xl:px-80 grow text-dark-blue gap-4"}>
+      <div className={"flex flex-col px-8 sm:px-40 py-8 2xl:px-80 grow text-dark-blue gap-4"}>
         {state.loading ? <Loading/> :
           <>
             <SiteInput

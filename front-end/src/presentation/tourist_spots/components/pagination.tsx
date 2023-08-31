@@ -9,7 +9,7 @@ interface PaginationProps {
 export const Pagination = (props: PaginationProps) => {
   const maxPages = props.arrayLength / props.pageSize;
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center pt-2">
       <span className="text-sm text-gray-700">
       Página <span className="font-semibold text-gray-900">{props.currentPage}</span> de <span
         className="font-semibold text-gray-900">{Math.ceil(maxPages)}</span>

@@ -62,7 +62,7 @@ const _TouristSpots = () => {
 
   return (
     <>
-      <div className={"flex flex-col justify-between relative grow px-40 py-8 2xl:px-80"}>
+      <div className={"flex flex-col justify-between relative grow px-8 sm:px-40 py-8 2xl:px-80"}>
         <div className={"flex w-full gap-6 justify-between"}>
           <SiteInput placeholder={"Busque por nome, descrição e localização"} type={"text"} onChange={Debounce ((e) => handleSearch(e.target.value), 500)}/>
         </div>
