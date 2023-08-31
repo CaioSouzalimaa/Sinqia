@@ -1,11 +1,13 @@
 interface PaginationProps {
   arrayLength: number;
   currentPage: number;
-  itemsPerPage: number;
+  pageSize: number;
+  onNextPage: () => void;
+  onPreviousPage: () => void;
 }
 
 export const Pagination = (props: PaginationProps) => {
-  const maxPages = props.arrayLength / props.itemsPerPage;
+  const maxPages = props.arrayLength / props.pageSize;
   return (
     <div className="flex flex-col items-center">
       <span className="text-sm text-gray-700 dark:text-gray-400">
@@ -14,11 +16,17 @@ export const Pagination = (props: PaginationProps) => {
       </span>
       <div className="inline-flex mt-2 xs:mt-0">
         <button
-          className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-dark-blue rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          disabled={props.currentPage === 1}
+          className="flex items-center justify-center px-3 h-8 text-sm disabled:opacity-50 font-medium text-white bg-dark-blue rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          onClick={props.onPreviousPage}
+        >
           Anterior
         </button>
         <button
-          className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-dark-blue border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          disabled={props.currentPage === Math.ceil(maxPages)}
+          className="flex items-center justify-center px-3 h-8 text-sm disabled:opacity-50 font-medium text-white bg-dark-blue border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          onClick={props.onNextPage}
+        >
           Próximo
         </button>
       </div>

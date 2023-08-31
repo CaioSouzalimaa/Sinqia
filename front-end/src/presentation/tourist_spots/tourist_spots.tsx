@@ -22,12 +22,13 @@ export const TouristSpots = () => {
 const _TouristSpots = () => {
   const touristSpotsContext = useContext(TouristSpotsContext) as TouristSpotsContextInterface;
   const state = touristSpotsContext.state;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const filteredTouristSpots = state.touristSpots.slice((currentPage - 1) * 5, (currentPage * 5));
 
   const [openModal, setOpenModal] = useState<{ isOpen: boolean, id: number | undefined }>({
     isOpen: false,
     id: undefined
   });
-
 
   const handleConfirmDelete = () => {
     const id = openModal.id;
@@ -69,7 +70,7 @@ const _TouristSpots = () => {
           {state.loading ?
             <div>Carregando...</div>
             :
-            state.touristSpots.map((touristSpot) => (
+            filteredTouristSpots.map((touristSpot) => (
               <CardTouristSpot
                 onDelete={() => setOpenModal({isOpen: true, id: touristSpot.id})}
                 id={touristSpot.id as number}
@@ -84,7 +85,13 @@ const _TouristSpots = () => {
         }
       </div>
 
-      <Pagination arrayLength={state.touristSpots.length} currentPage={1} itemsPerPage={5}/>
+      <Pagination
+        arrayLength={state.touristSpots.length}
+        currentPage={currentPage}
+        pageSize={5}
+        onNextPage={() => setCurrentPage(currentPage + 1)}
+        onPreviousPage={() => setCurrentPage(currentPage - 1)}
+      />
 
       {openModal &&
           <ModalConfirmDelete
