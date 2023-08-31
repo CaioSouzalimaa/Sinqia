@@ -40,40 +40,44 @@ const _AddTouristSpot = () => {
 
   return (
     <div className={"flex flex-col px-40 py-8 2xl:px-80 text-dark-blue gap-4"}>
-      <div className={"flex flex-col gap-2"}>
-        <p className={"font-medium"}>Nome *</p>
-        <SiteInput placeholder={"Digite um nome"} defaultValue={state.touristSpot.name} type={"text"}
-                   onChange={(e) => addTouristSpotContext.onNameChange(e.target.value)}/>
-      </div>
-      <div>
-        <p className={"font-medium"}>Descrição *</p>
-        <SiteInput
-          placeholder={"Digite uma descrição"}
-          defaultValue={state.touristSpot.description}
-          type={"text"}
-          maxLength={100}
-          onChange={(e) => addTouristSpotContext.onDescriptionChange(e.target.value)}
-        />
-      </div>
-      <div className={"flex w-full items-center gap-4"}>
-        <SelectState defaultValue={state.touristSpot.state.toUpperCase()}
-                     onChange={(e) => addTouristSpotContext.onStateChange(e.target.value)}/>
-        <div className={"w-full"}>
-          <p className="font-medium">Cidade *</p>
-          <SiteInput placeholder={"Digite uma cidade"} defaultValue={state.touristSpot.city} type={"text"}
-                     onChange={(e) => addTouristSpotContext.onCityChange(e.target.value)}/>
-        </div>
-      </div>
-      <div>
-        <p className={"font-medium"}>Referência</p>
-        <SiteInput placeholder={"Digite uma referência"} defaultValue={state.touristSpot.location} type={"text"}
-                   onChange={(e) => addTouristSpotContext.onLocationChange(e.target.value)}/>
-      </div>
+      {state.loading ? <p>Carregando...</p> :
+        <>
+          <div className={"flex flex-col gap-2"}>
+            <p className={"font-medium"}>Nome *</p>
+            <SiteInput placeholder={"Digite um nome"} defaultValue={state.touristSpot.name} type={"text"}
+                       onChange={(e) => addTouristSpotContext.onNameChange(e.target.value)}/>
+          </div>
+          <div>
+            <p className={"font-medium"}>Descrição *</p>
+            <SiteInput
+              placeholder={"Digite uma descrição"}
+              defaultValue={state.touristSpot.description}
+              type={"text"}
+              maxLength={100}
+              onChange={(e) => addTouristSpotContext.onDescriptionChange(e.target.value)}
+            />
+          </div>
+          <div className={"flex w-full items-center gap-4"}>
+            <SelectState defaultValue={state.touristSpot.state.toUpperCase()}
+                         onChange={(e) => addTouristSpotContext.onStateChange(e.target.value)}/>
+            <div className={"w-full"}>
+              <p className="font-medium">Cidade *</p>
+              <SiteInput placeholder={"Digite uma cidade"} defaultValue={state.touristSpot.city} type={"text"}
+                         onChange={(e) => addTouristSpotContext.onCityChange(e.target.value)}/>
+            </div>
+          </div>
+          <div>
+            <p className={"font-medium"}>Referência</p>
+            <SiteInput placeholder={"Digite uma referência"} defaultValue={state.touristSpot.location} type={"text"}
+                       onChange={(e) => addTouristSpotContext.onLocationChange(e.target.value)}/>
+          </div>
 
-      <div className={"flex w-full justify-between gap-2"}>
-        <SiteButton onClick={() => navigate("/")} text={"Voltar"}/>
-        <SiteButton onClick={() => addTouristSpotContext.onSave()} text={"Salvar"}/>
-      </div>
+          <div className={"flex w-full justify-between gap-2"}>
+            <SiteButton disabled={!!state.success} onClick={() => navigate("/")} text={"Voltar"}/>
+            <SiteButton disabled={!!state.success} onClick={() => addTouristSpotContext.onSave()} text={"Salvar"}/>
+          </div>
+        </>
+      }
 
       <Snackbar
         type={"success"}

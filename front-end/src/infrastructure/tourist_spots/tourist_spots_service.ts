@@ -34,7 +34,7 @@ export class TouristSpotsImpl implements TouristSpotsService {
   }
 
   async addTouristSpot(touristSpot: TouristSpotEntity): Promise<void> {
-    api
+   await api
       .post('/TouristSpot', touristSpot)
       .then(() => console.log('Tourist Spot successfully added'))
       .catch((error) => {
@@ -43,7 +43,7 @@ export class TouristSpotsImpl implements TouristSpotsService {
   }
 
   async updateTouristSpot(touristSpot: TouristSpotEntity, id: number): Promise<void> {
-    api
+    await api
       .put(`/TouristSpot/${id}`, touristSpot)
       .then(() => console.log('Tourist Spot successfully updated'))
       .catch((error) => {
@@ -52,7 +52,7 @@ export class TouristSpotsImpl implements TouristSpotsService {
   }
 
   async deleteTouristSpot(id: number): Promise<void> {
-    api
+    await api
       .delete(`/TouristSpot/${id}`)
       .then(() => console.log('Tourist spot successfully deleted'))
       .catch((error) => {
