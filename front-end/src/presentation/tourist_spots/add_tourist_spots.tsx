@@ -37,6 +37,7 @@ const _AddTouristSpot = () => {
         addTouristSpotContext.clearError();
       }, 2000);
     }
+    state.touristSpot.createdAt = new Date();
   }, [state.success, state.error]);
 
   return (
@@ -97,6 +98,7 @@ const _AddTouristSpot = () => {
             <div className={"flex w-full justify-between gap-2"}>
               <SiteButton disabled={!!state.success} onClick={() => navigate("/")} text={"Voltar"}/>
               <SiteButton disabled={!!state.success} onClick={() => addTouristSpotContext.onSave()} text={"Salvar"}/>
+              {/*<SiteButton disabled={!!state.success} onClick={() => console.log(state.touristSpot.createdAt)} text={"Salvar"}/>*/}
             </div>
           </>
         }
