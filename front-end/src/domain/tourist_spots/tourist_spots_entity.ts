@@ -1,5 +1,5 @@
 export interface TouristSpotEntity {
-  id?: string;
+  id?: number;
   name: string;
   description: string;
   location: string;

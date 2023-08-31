@@ -8,14 +8,23 @@ export const TouristSpotsProvider = ({children}: { children: ReactNode }) => {
   const touristSpotsService = getIt.get<TouristSpotsService>(TouristSpotsService);
 
   const getTouristSpots = async () => {
-    setState(state => ({...state, loading: true}));
-    const touristSpots = await touristSpotsService.getTouristSpots();
-    setState(state => ({...state, touristSpots, loading: false}));
+    try{
+      setState(state => ({...state, loading: true}));
+      const touristSpots = await touristSpotsService.getTouristSpots();
+      setState(state => ({...state, touristSpots, loading: false}));
+    } catch (e)  {
+      setState(state => ({...state, loading: false, error: "Erro ao buscar os pontos turísticos"}));
+    }
   }
-  const deleteTouristSpot = async (id: string) => {
-    setState(state => ({...state, loading: true}));
-    await touristSpotsService.deleteTouristSpot(id);
-    setState(state => ({...state, loading: false, success: 'Tourist Spot deleted!'}));
+  const deleteTouristSpot = async (id: number) => {
+    try{
+      setState(state => ({...state, loading: true}));
+      await touristSpotsService.deleteTouristSpot(id);
+      await getTouristSpots();
+      setState(state => ({...state, success: 'Ponto turistico excluído com sucesso!'}));
+    } catch (e)  {
+      setState(state => ({...state, loading: false, error: "Erro ao excluir o ponto turístico"}));
+    }
   }
   const clearError = () => {
     setState(state => ({...state, error: undefined}));

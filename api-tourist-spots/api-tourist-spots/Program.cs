@@ -27,12 +27,26 @@ namespace api_tourist_spots
 
             var app = builder.Build();
 
+            // CORS
+            #region [Cors]
+            builder.Services.AddCors();
+            #endregion
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            #region [Cors]
+            app.UseCors(c =>
+            {
+                c.AllowAnyHeader();
+                c.AllowAnyMethod();
+                c.AllowAnyOrigin();
+            });
+            #endregion
 
             app.UseHttpsRedirection();
 

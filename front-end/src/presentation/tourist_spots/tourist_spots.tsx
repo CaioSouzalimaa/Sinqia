@@ -2,6 +2,14 @@ import {TouristSpotsProvider} from "../../application/tourist_spots/tourist_spot
 import {SiteInput} from "../shared/components/site_input.tsx";
 import {CardTouristSpot} from "./components/card_tourist_spot.tsx";
 import {Pagination} from "./components/pagination.tsx";
+import {
+  TouristSpotsContext,
+  TouristSpotsContextInterface
+} from "../../application/tourist_spots/tourist_spots_context.ts";
+import {useContext, useEffect, useState} from "react";
+import {ModalConfirmDelete} from "./components/modal_confirm_delete.tsx";
+import {SiteButton} from "../shared/components/site_button.tsx";
+import {Snackbar} from "../shared/components/snackbar.tsx";
 
 export const TouristSpots = () => {
   return (
@@ -11,56 +19,86 @@ export const TouristSpots = () => {
   )
 }
 
-const arrayTeste = [
-  {
-    id: "1",
-    name: "Praia do Forte",
-    description: "Praia do Forte uma praia localizada no município de Mata de São João, no estado da Bahia, no Brasil.",
-    location: "Praia do Forte",
-    city: "Mata de São João",
-    state: "BA"
-  },
-  {
-    id: "2",
-    name: "Praia do Forte",
-    description: "Praia do Forte uma praia localizada no município de Mata de São João, no estado da Bahia, no Brasil.",
-    location: "Praia do Forte",
-    city: "Mata de São João",
-    state: "BA"
-  },
-  {
-    id: "3",
-    name: "Praia do Forte",
-    description: "Praia do Forte uma praia localizada no município de Mata de São João, no estado da Bahia, no Brasil.",
-    location: "Praia do Forte",
-    city: "Mata de São João",
-    state: "BA"
-  }]
-
-
 const _TouristSpots = () => {
+  const touristSpotsContext = useContext(TouristSpotsContext) as TouristSpotsContextInterface;
+  const state = touristSpotsContext.state;
+
+  const [openModal, setOpenModal] = useState<{ isOpen: boolean, id: number | undefined }>({
+    isOpen: false,
+    id: undefined
+  });
+
+
+  const handleConfirmDelete = () => {
+    const id = openModal.id;
+    setOpenModal({isOpen: false, id: undefined})
+    if (id) {
+      touristSpotsContext.deleteTouristSpot(id);
+    }
+  }
+
+  const handleCancelDelete = () => {
+    setOpenModal({isOpen: false, id: undefined})
+  }
+
+  useEffect(() => {
+    touristSpotsContext.getTouristSpots();
+  }, []);
+
+  useEffect(() => {
+    if (openModal.isOpen) {
+      setTimeout(() => {
+        touristSpotsContext.clearSuccess();
+      }, 3000);
+    }
+  }, [openModal]);
+
   return (
-    <div className={"flex flex-col px-40 py-8 2xl:px-80"}>
-      <div className={"flex w-full gap-6 justify-between"}>
-        <SiteInput placeholder={"Pesquisar..."} type={"text"} onChange={(e) => console.log(e.target.value)}/>
-        <button className={"bg-dark-blue rounded p-2 text-white hover:opacity-80"}>Buscar</button>
+    <div className={"flex flex-col justify-between relative grow px-40 py-8 2xl:px-80"}>
+      <div>
+        <div className={"flex w-full gap-6 justify-between"}>
+          <SiteInput placeholder={"Pesquisar..."} type={"text"} onChange={(e) => console.log(e.target.value)}/>
+          <SiteButton text={"Buscar"} onClick={() => console.log("Buscar")}/>
+        </div>
+
+
+        {state.loading ?
+          <p>Carregando...</p>
+          :
+          <div className={"flex flex-col pt-6 gap-10"}>
+          {state.loading ?
+            <div>Carregando...</div>
+            :
+            state.touristSpots.map((touristSpot) => (
+              <CardTouristSpot
+                onDelete={() => setOpenModal({isOpen: true, id: touristSpot.id})}
+                id={touristSpot.id as number}
+                name={touristSpot.name}
+                description={touristSpot.description}
+                location={touristSpot.location}
+                city={touristSpot.city}
+                state={touristSpot.state}
+              />
+            ))}
+        </div>
+        }
       </div>
 
+      <Pagination arrayLength={state.touristSpots.length} currentPage={1} itemsPerPage={5}/>
 
-      <div className={"flex flex-col pt-6 gap-10"}>
-        {arrayTeste.map((touristSpot) => (
-          <CardTouristSpot
-            id={touristSpot.id}
-            name={touristSpot.name}
-            description={touristSpot.description}
-            location={touristSpot.location}
-            city={touristSpot.city}
-            state={touristSpot.state}
+      {openModal &&
+          <ModalConfirmDelete
+              openModal={openModal.isOpen}
+              onDelete={handleConfirmDelete}
+              onCancel={handleCancelDelete}
           />
-        ))}
-      </div>
+      }
 
-      <Pagination/>
+      <Snackbar
+        type={"success"}
+        message={state.success}
+        open={!!state.success}
+      />
     </div>
   )
 }

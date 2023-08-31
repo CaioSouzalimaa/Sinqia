@@ -1,22 +1,25 @@
 import {twMerge} from "tailwind-merge";
-import {ChangeEvent} from "react";
+import {InputHTMLAttributes} from "react";
 
-interface SiteInputProps {
-  placeholder: string;
-  type: string;
-  className?: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+interface SiteInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  title?: string;
 }
 
 export const SiteInput = (props: SiteInputProps) => {
   return (
-    <input
-      className={
-        twMerge("w-full h-11 px-2.5 py-4 rounded border border-line-color text-base font-light",
-          props.className)}
-      type={props.type}
-      placeholder={props.placeholder}
-      onChange={props.onChange}
-    />
+    <div className={"w-full"}>
+      {props.title && <p className="font-medium">{`${props.title} ${props.required ? '*' : ''}`}</p>}
+      <input
+        className={
+          twMerge("w-full h-11 px-2.5 py-4 rounded border border-line-color text-base font-light",
+            props.className)}
+        type={props.type}
+        defaultValue={props.defaultValue}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+        maxLength={props.maxLength}
+        disabled={props.disabled}
+      />
+    </div>
   )
 }

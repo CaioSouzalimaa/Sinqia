@@ -3,12 +3,12 @@ import {getIt} from "../../../injection.ts";
 import {AddTouristSpotsContext, initialState} from "./add_tourist_spots_context.ts";
 import {TouristSpotsService} from "../../../domain/tourist_spots/tourist_spots_service.ts";
 
-export const AddTouristSpotsProvider = ({children, id} : {children: ReactNode, id?: string}) => {
-  const [state, setState] = useState({...initialState, isEditMode: !!id});
-  const touristSpotsService = getIt.get<TouristSpotsService>(TouristSpotsService);
-  const isEditMode = !!id;
+export const AddTouristSpotsProvider = ({children, id} : {children: ReactNode, id?: number}) => {
+  const [state, setState] = useState({...initialState, isEditMode: !!id}); // Set the initial state
+  const touristSpotsService = getIt.get<TouristSpotsService>(TouristSpotsService); // Get the service from the container
+  const isEditMode = !!id; // Verify if page has an id, if it has, it's in edit mode
 
-  useEffect(() => {
+  useEffect(() => { // When the component is mounted, if it's in edit mode, get the tourist spot
     if (isEditMode) {
       getTouristSpot();
     }
@@ -16,10 +16,11 @@ export const AddTouristSpotsProvider = ({children, id} : {children: ReactNode, i
 
   const getTouristSpot = async () => {
     setState(state => ({...state, loading: true}));
-    const touristSpot = await touristSpotsService.getTouristSpot(id as string);
+    const touristSpot = await touristSpotsService.getTouristSpot(id as number);
     setState(state => ({...state, touristSpot, loading: false}));
   }
 
+  // Functions to change the state
   const onNameChange = (name: string) => {
     setState(state => ({...state, touristSpot: {...state.touristSpot, name}}));
   }
@@ -36,9 +37,35 @@ export const AddTouristSpotsProvider = ({children, id} : {children: ReactNode, i
     setState(state => ({...state, touristSpot: {...state.touristSpot, state: value}}));
   }
 
+  // Function to save the tourist spot
   const onSave = async () => {
-    console.log(state);
+    if (!state.touristSpot.name) {
+      setState(state => ({...state, error: 'Insira um nome.'}));
+      return;
+    }
+    if (!state.touristSpot.description) {
+      setState(state => ({...state, error: 'Insira uma descrição.'}));
+      return;
+    }
+    if (!state.touristSpot.city) {
+      setState(state => ({...state, error: 'Insira uma cidade.'}));
+      return;
+    }
+    try{
+      setState(state => ({...state, loading: true}));
+      if (isEditMode) {
+        const createdAt = new Date();
+        setState(state => ({...state, touristSpot: {...state.touristSpot, createdAt}}));
+        await touristSpotsService.updateTouristSpot(state.touristSpot, id as number);
+      } else {
+        await touristSpotsService.addTouristSpot(state.touristSpot);
+      }
+      setState(state => ({...state, loading: false, success: `Ponto turistico ${isEditMode? "editado" : "adicionado"} com sucesso!`}));
+    } catch (e)  {
+      setState(state => ({...state, loading: false, error: "Erro ao adicionar o ponto turístico"}));
+    }
   }
+
   const clearError = () => {
     setState(state => ({...state, error: undefined}));
   }
