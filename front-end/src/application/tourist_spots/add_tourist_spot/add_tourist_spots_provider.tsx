@@ -60,7 +60,7 @@ export const AddTouristSpotsProvider = ({children, id} : {children: ReactNode, i
       } else {
         await touristSpotsService.addTouristSpot(state.touristSpot);
       }
-      setState(state => ({...state, loading: false, success: 'Ponto turistico adicionado com sucesso!'}));
+      setState(state => ({...state, loading: false, success: `Ponto turistico ${isEditMode? "editado" : "adicionado"} com sucesso!`}));
     } catch (e)  {
       setState(state => ({...state, loading: false, error: "Erro ao adicionar o ponto turístico"}));
     }

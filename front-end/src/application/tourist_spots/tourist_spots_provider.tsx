@@ -21,7 +21,7 @@ export const TouristSpotsProvider = ({children}: { children: ReactNode }) => {
       setState(state => ({...state, loading: true}));
       await touristSpotsService.deleteTouristSpot(id);
       await getTouristSpots();
-      setState(state => ({...state, success: 'Ponto turistico excluído!'}));
+      setState(state => ({...state, success: 'Ponto turistico excluído com sucesso!'}));
     } catch (e)  {
       setState(state => ({...state, loading: false, error: "Erro ao excluir o ponto turístico"}));
     }
