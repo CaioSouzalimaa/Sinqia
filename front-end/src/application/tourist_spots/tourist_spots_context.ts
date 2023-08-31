@@ -5,6 +5,7 @@ import {createContext} from "react";
 interface TouristSpotsActions {
   getTouristSpots: () => void;
   deleteTouristSpot: (id: number) => void;
+  searchTouristSpots: (search: string) => void;
   clearError: () => void;
   clearSuccess: () => void;
 }
