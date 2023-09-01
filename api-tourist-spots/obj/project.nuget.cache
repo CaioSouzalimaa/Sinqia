@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Jl33j2fZhn7RTQ0UmIi4n08XKs6WA+n9NHtlEYdxGJLHKI4KfIGoxrJCypYFQKD5z7fylW3DC4jQ6e57MMFomA==",
+  "dgSpecHash": "S1VMJAk4mZrqYxWbD0cvPRE7gmwAl1QiKDkOjTZCi3Q0jrZeJrCicyvuvbDPcSqHDYystB/+0ktQHFEkF47nWQ==",
   "success": true,
-  "projectFilePath": "D:\\Users\\Caio\\Desktop\\Desafio NewCon\\teste-newcon\\api-tourist-spots\\api-tourist-spots\\api-tourist-spots.csproj",
+  "projectFilePath": "D:\\Users\\Caio\\Desktop\\Desafio NewCon\\teste-newcon\\api-tourist-spots\\api-tourist-spots.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Caio\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Caio\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

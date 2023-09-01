@@ -37,11 +37,12 @@ const _AddTouristSpot = () => {
         addTouristSpotContext.clearError();
       }, 2000);
     }
+    state.touristSpot.createdAt = new Date();
   }, [state.success, state.error]);
 
   return (
     <>
-      <div className={"flex flex-col px-40 py-8 2xl:px-80 grow text-dark-blue gap-4"}>
+      <div className={"flex flex-col px-8 sm:px-40 py-8 2xl:px-80 grow text-dark-blue gap-4"}>
         {state.loading ? <Loading/> :
           <>
             <SiteInput
@@ -97,6 +98,7 @@ const _AddTouristSpot = () => {
             <div className={"flex w-full justify-between gap-2"}>
               <SiteButton disabled={!!state.success} onClick={() => navigate("/")} text={"Voltar"}/>
               <SiteButton disabled={!!state.success} onClick={() => addTouristSpotContext.onSave()} text={"Salvar"}/>
+              {/*<SiteButton disabled={!!state.success} onClick={() => console.log(state.touristSpot.createdAt)} text={"Salvar"}/>*/}
             </div>
           </>
         }

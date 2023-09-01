@@ -24,7 +24,8 @@ const _TouristSpots = () => {
   const touristSpotsContext = useContext(TouristSpotsContext) as TouristSpotsContextInterface;
   const state = touristSpotsContext.state;
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const paginationTouristSpots = state.touristSpots.slice((currentPage - 1) * 5, (currentPage * 5));
+  const sortedTouristSpots = state.touristSpots.sort((a,b) => a.createdAt > b.createdAt ? -1 : 1);
+  const paginationTouristSpots = sortedTouristSpots.slice((currentPage - 1) * 5, (currentPage * 5));
 
   const [openModal, setOpenModal] = useState<{ isOpen: boolean, id: number | undefined }>({
     isOpen: false,
@@ -61,7 +62,7 @@ const _TouristSpots = () => {
 
   return (
     <>
-      <div className={"flex flex-col justify-between relative grow px-40 py-8 2xl:px-80"}>
+      <div className={"flex flex-col justify-between relative grow px-8 sm:px-40 py-8 2xl:px-80"}>
         <div className={"flex w-full gap-6 justify-between"}>
           <SiteInput placeholder={"Busque por nome, descrição e localização"} type={"text"} onChange={Debounce ((e) => handleSearch(e.target.value), 500)}/>
         </div>
@@ -72,6 +73,7 @@ const _TouristSpots = () => {
               :
               paginationTouristSpots.map((touristSpot) => (
                 <CardTouristSpot
+                  key={touristSpot.id}
                   onDelete={() => setOpenModal({isOpen: true, id: touristSpot.id})}
                   id={touristSpot.id as number}
                   name={touristSpot.name}
