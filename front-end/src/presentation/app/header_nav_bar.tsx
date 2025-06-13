@@ -1,14 +1,15 @@
 import {useNavigate} from "react-router-dom";
-import Logo from "../../assets/logo.png";
+import {Logo} from "../../assets/logo.tsx";
+
 
 export const HeaderNavBar = () => {
   const navigate = useNavigate();
   const isAddPage = location.pathname === "/pontos-turisticos/adicionar" || location.pathname.startsWith("/pontos-turisticos/adicionar/");
   const isHome = location.pathname === "/";
   return (
-    <nav className={"flex flex-row sm:gap-10 px-8 md:px-40 2xl:px-80 py-3 w-full bg-dark-blue items-center sticky top-0 z-50 justify-between"}>
+    <nav className={"flex flex-row sm:gap-10 px-8 md:px-40 2xl:px-80 py-3 w-full bg-secondary items-center sticky top-0 z-50 justify-between"}>
       <div>
-        <img className={"w-20 md:w-auto"} src={Logo} alt={"Logo"} onClick={() => navigate("/")}/>
+        <Logo/>
       </div>
       <div>
         <ul className={"flex flex-row w-full gap-2 sm:gap-10 text-[8px] sm:text-sm text-white"}>

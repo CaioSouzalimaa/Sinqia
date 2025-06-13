@@ -42,7 +42,7 @@ const _AddTouristSpot = () => {
 
   return (
     <>
-      <div className={"flex flex-col px-8 sm:px-40 py-8 2xl:px-80 grow text-dark-blue gap-4"}>
+      <div className={"flex flex-col px-8 sm:px-40 py-8 2xl:px-80 grow gap-4"}>
         {state.loading ? <Loading/> :
           <>
             <SiteInput
@@ -96,9 +96,8 @@ const _AddTouristSpot = () => {
 
 
             <div className={"flex w-full justify-between gap-2"}>
-              <SiteButton disabled={!!state.success} onClick={() => navigate("/")} text={"Voltar"}/>
-              <SiteButton disabled={!!state.success} onClick={() => addTouristSpotContext.onSave()} text={"Salvar"}/>
-              {/*<SiteButton disabled={!!state.success} onClick={() => console.log(state.touristSpot.createdAt)} text={"Salvar"}/>*/}
+              <SiteButton className={"bg-red-700"} disabled={!!state.success} onClick={() => navigate("/")} text={"Voltar"}/>
+              <SiteButton className={"bg-green-500"} disabled={!!state.success} onClick={() => addTouristSpotContext.onSave()} text={"Salvar"}/>
             </div>
           </>
         }

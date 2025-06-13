@@ -86,7 +86,7 @@ const _TouristSpots = () => {
 
             {!paginationTouristSpots.length ?
               <div className={"flex items-center justify-center"}>
-                <h1 className={"text-dark-blue font-bold"}>Nenhum ponto turístico encontrado</h1>
+                <h1 className={"text-primary font-bold"}>Nenhum ponto turístico encontrado</h1>
               </div>
               : null
             }

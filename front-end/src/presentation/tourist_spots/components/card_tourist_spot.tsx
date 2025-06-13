@@ -17,12 +17,12 @@ export const CardTouristSpot = (props: CardTouristSpotProps) => {
 
   return (
     <div key={props.id} className={"flex flex-col w-full gap-1"}>
-      <h1 className={"font-bold text-xl text-dark-blue"}>{props.name}</h1>
+      <h1 className={"font-bold text-xl text-primary"}>{props.name}</h1>
       <p>{props.description}</p>
       <div className={"flex flex-col gap-4"}>
         <p>{props.state} - {props.city}</p>
         <p>
-          <span className={"font-medium text-dark-blue"}>Referência: </span>
+          <span className={"font-medium text-primary"}>Referência: </span>
           {props.location}
         </p>
       </div>
