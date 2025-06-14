@@ -1,0 +1,26 @@
+CREATE PROCEDURE gerenciar_cidades
+    @operacao VARCHAR(10), 
+    @cidade_id INT = NULL, 
+    @nome VARCHAR(50) = NULL, 
+    @estado CHAR(2) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @operacao = 'INSERT'
+    BEGIN
+        INSERT INTO cidades (nome, estado) 
+        VALUES (@nome, @estado);
+    END
+    ELSE IF @operacao = 'UPDATE'
+    BEGIN
+        UPDATE cidades 
+        SET nome = @nome, estado = @estado 
+        WHERE id = @cidade_id;
+    END
+    ELSE IF @operacao = 'DELETE'
+    BEGIN
+        DELETE FROM cidades 
+        WHERE id = @cidade_id;
+    END
+END;

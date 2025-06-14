@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("api-tourist-spots")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ec772b071503820d0c57a99963d0b53708eaf23")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ef04b90601ce0654db296fd1af6d7de6d6186c0")]
 [assembly: System.Reflection.AssemblyProductAttribute("api-tourist-spots")]
 [assembly: System.Reflection.AssemblyTitleAttribute("api-tourist-spots")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
