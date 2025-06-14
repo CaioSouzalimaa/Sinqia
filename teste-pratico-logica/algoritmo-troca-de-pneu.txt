@@ -1,0 +1,19 @@
+1 - Estacionar o carro em um local seguro.
+2 - Engatar o freio de mão e colocar o carro em 1ª marcha
+3 - Ligar o pisca alerta para sinalizar a parada.
+4 - Colocar o triângulo de segurança a pelo menos 30 metros do carro.
+5 - Verificar o local do estepe e das ferramentas.
+6 - Pegar o estepe e ferramentas.
+7 - Colocar o macaco no local indicado de acordo com o manual do carro.
+8 - Usar o macaco para erguer o carro, de modo que o pneu furado fique suspenso.
+9 - Remover completamente os parafusos com as ferramentas.
+10 - Retirar o pneu furado
+11 - Colocar o estepe no lugar e alinhar os furos da roda com os parafusos.
+12 - Apertar os parafusos com as ferramentas.
+13 - Baixar o carro com o macaco, até que o pneus volte ao chão.
+14 - Colocar o pneu furado no local onde estava o estepe.
+15 - Guarde as ferramentas.
+16 - Recolha o triângulo.
+17 - Desligue o pisca alerta.
+18 - Desengate o freio de mão e engate o carro.
+19 - Siga viagem com cuidado. 
