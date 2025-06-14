@@ -1,0 +1,2 @@
+DELETE FROM clientes 
+WHERE id BETWEEN 100 AND 200;

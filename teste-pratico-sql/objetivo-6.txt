@@ -1,0 +1,2 @@
+INSERT INTO clientes (id, nome, cidade_id, email) 
+VALUES (101, 'Caio Souza Lima', 5, 'caio@email.com');
