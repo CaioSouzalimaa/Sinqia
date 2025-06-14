@@ -6,7 +6,7 @@ Implementando operações CRUD (Create, Read, Update, Delete) e consumindo uma A
 
 Antes de tudo clone este repositório
 ```bash
-git clone git@github.com:CaioSouzalimaa/teste-newcon.git
+git clone git@github.com:CaioSouzalimaa/Sinqia.git
 ```
 
 ## Inicie executando a API e depois o Frontend
